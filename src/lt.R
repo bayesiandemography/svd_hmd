@@ -25,7 +25,7 @@ get_data <- function(dir) {
     files <- list.files(dir, full.names = TRUE)
     ans <- map(files,
                read_table,
-               col_types = "ic----ii--",
+               col_types = "icd----i--",
                na = ".",
                skip = 1)
     names(ans) <- country_code
@@ -46,7 +46,7 @@ unlink(tmp_dir, recursive = TRUE)
 
 has_missing <- lt %>%
     group_by(country, time, type_age) %>%
-    summarise(has_missing = anyNA(dx) || anyNA(Lx), .groups = "drop")
+    summarise(has_missing = anyNA(mx) || anyNA(Lx), .groups = "drop")
 
 lt <- inner_join(lt, has_missing, by = c("country", "time", "type_age")) %>%
     filter(!has_missing) %>%

@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# svd_mortality
+# svd_hmd
 
 Use data from the [Human Mortality Database](https://www.mortality.org/Home/Index) to construct summary measures of age-sex patterns in human mortality. The measures are constructed by applying a singular value decomposition to logged mortality rates, and then rescaling. For details, see [link to paper].
 
@@ -27,6 +27,8 @@ Use data from the [Human Mortality Database](https://www.mortality.org/Home/Inde
 **src** - R code to do the calculations.
 
 ## Format of the output files
+
+
 
 
 
