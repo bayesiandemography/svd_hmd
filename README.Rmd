@@ -22,7 +22,7 @@ Use data from the [Human Mortality Database](https://www.mortality.org/Home/Inde
 
 **data** - A folder with the data. If you would like to replicate the calculations, you will need to populate this folder by downloading zipped files from the Statistics column of the Previous Versions table [here](https://www.mortality.org/Data/ZippedDataFiles). (Requires registering as a Human Mortality Database user.)
 
-**out** - Folder for output from the calculations. Only the final outputs - a collection of CSV files - are stored on GitHub.
+**out** - Folder for output from the calculations. Only the final outputs are stored on GitHub.
 
 **src** - R code to do the calculations.
 
