@@ -53,7 +53,7 @@ lt <- inner_join(lt, has_missing, by = c("country", "time", "type_age")) %>%
     select(-has_missing) %>%
     mutate(sex = case_when(sex == "female" ~ "Female",
                            sex == "male" ~ "Male",
-                           sex == "both" ~ ".Total"))
+                           sex == "both" ~ "total"))
 
 saveRDS(lt, file = .out)
 

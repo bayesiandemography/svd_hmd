@@ -13,7 +13,7 @@ out/lt_20221129.rds: src/lt.R \
 out/HMD_20221129.rds: src/hmd.R \
   out/lt_20221129.rds
 	Rscript $^ $@ --n_comp=$(N_COMP)
-
+	rm out/lt_20221129.rds
 
 ## Clean
 
