@@ -5,6 +5,7 @@ library(forcats)
 library(purrr)
 library(poputils)
 library(bage)
+library(Matrix, warn.conflicts = FALSE)
 library(command)
 
 cmd_assign(lt_raw = "out/lt_20221129.rds",
@@ -91,8 +92,9 @@ HMD <- bind_rows(mx, mx_joint) %>%
                                  scaled_svd_comp,
                                  n = n_comp,
                                  transform = "log")) %>%
-    unnest_wider(scaled_svd_comp) %>%
-    select(-data) %>%
+    mutate(matrix = map(scaled_svd_comp, function(x) x$matrix),
+           offset = map(scaled_svd_comp, function(x) x$offset)) %>%
+    select(-data, -scaled_svd_comp) %>%
     mutate(type = ifelse(sex %in% c("total", "joint"), sex, "indep")) %>%
     group_by(type, type_age, age_open) %>%
     nest(data = c(sex, matrix, offset)) %>%
@@ -120,8 +122,10 @@ make_df_indep <- function(x) {
     labels_age <- lapply(x$offset, names)
     labels_sexgender <- do.call(c, labels_sexgender)
     labels_age <- do.call(c, labels_age)
-    matrix <- do.call(rbind, x$matrix)
+    matrix <- .bdiag(x$matrix)
+    rownames(matrix) <- paste(labels_sexgender, labels_age, sep = ".")
     offset <- do.call(c, x$offset)
+    names(offset) <- rownames(matrix)
     tibble::tibble(labels_age = list(labels_age),
                    labels_sexgender = list(labels_sexgender),
                    matrix = list(matrix),
@@ -138,5 +142,48 @@ HMD <- bind_rows(HMD_total, HMD_joint, HMD_indep)
 
 saveRDS(HMD, file = .out)
            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
